@@ -86,7 +86,6 @@ class _AnnouncementsState extends State<Announcements> {
                     },
                   ),
                 ),
-                //Spacer(),
               ],
             ),
           ),
