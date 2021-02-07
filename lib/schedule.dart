@@ -1,24 +1,78 @@
 import 'package:flutter/material.dart';
 
 class Schedule extends StatelessWidget {
+  List<Color> scheduleColors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow[600],
+    Colors.green,
+    Colors.lightBlue,
+    Colors.purple
+  ];
+  List<Color> scheduleAccentColors = [
+    Colors.red[300],
+    Colors.orange[300],
+    Colors.yellow[300],
+    Colors.green[300],
+    Colors.lightBlue[300],
+    Colors.purple[300]
+  ];
+  List<String> periodName = ["1", "2", "3a", "3b", "3c", "4"];
+  List<List<String>> periodTime = [
+    [
+      "8:30am - 9:52am",
+      "9:52am - 11:12am",
+      "11:12am - 11:56am",
+      "11:56am - 12:36pm",
+      "12:36pm - 1:16pm",
+      "1:16pm - 2:36pm"
+    ],
+    [
+      "9:55am - 10:50am",
+      "10:50am - 11:45am",
+      "11:45am - 12:25pm",
+      "12:25pm - 1:05pm",
+      "1:05pm - 1:45pm",
+      "1:45pm - 2:36pm"
+    ],
+    [
+      "8:30am - 11:00am",
+      "11:00am - 11:45am",
+      "11:45am - 12:25pm",
+      "12:25pm - 1:05pm",
+      "1:05pm - 1:50pm",
+      "1:50pm - 2:36pm"
+    ]
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      children: [
-        Column(
-          children: <Widget>[
-            Card(
-              elevation: 0,
-              shadowColor: Colors.grey,
-              color: Colors.red,
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    color: Colors.red[300],
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+    ListView scheduleListView(schedule_index) {
+      return ListView.builder(
+        shrinkWrap: true,
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return Card(
+            elevation: 0,
+            shadowColor: Colors.grey,
+            color: scheduleColors[index],
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: new BoxDecoration(
+                    color: scheduleAccentColors[index],
+                    borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(5),
+                      bottomLeft: const Radius.circular(5),
+                    ),
+                  ),
+                  //color: Colors.red[300],
+                  child: SizedBox(
+                    height: 60,
+                    width: 60,
+                    child: Center(
                       child: Text(
-                        "1",
+                        periodName[index],
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 30,
@@ -26,29 +80,27 @@ class Schedule extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                    child: Text(
-                      "8:30am - 9:52am",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500),
-                    ),
+                ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                  child: Text(
+                    periodTime[schedule_index][index],
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-        Image(
-          image: AssetImage("assets/Floor 2 map HD.png"),
-        ),
-        Image(
-          image: AssetImage("assets/Floor 3 map HD.png"),
-        ),
-      ],
+          );
+        },
+      );
+    }
+
+    return TabBarView(
+      children: [scheduleListView(0), scheduleListView(1), scheduleListView(2)],
     );
   }
 }
