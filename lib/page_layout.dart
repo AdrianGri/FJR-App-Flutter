@@ -2,6 +2,8 @@ import 'package:fjr_app_v2/announcements.dart';
 import 'package:flutter/material.dart';
 import 'package:fjr_app_v2/map.dart';
 import 'package:fjr_app_v2/schedule.dart';
+import 'package:fjr_app_v2/Bus.dart';
+
 
 class PageLayout extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class _PageLayoutState extends State<PageLayout> {
     Announcements(),
     Map(),
     Schedule(),
+    Bus()
   ];
 
   void _onItemTapped(int index) {
@@ -63,6 +66,13 @@ class _PageLayoutState extends State<PageLayout> {
           );
         });
         break;
+      case 3:
+        setState(() {
+          newAppBar = AppBar(
+            title: Text("Bus Times"),
+            backgroundColor: Colors.red
+          );
+        });
     }
   }
 
@@ -75,7 +85,7 @@ class _PageLayoutState extends State<PageLayout> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: newAppBar,
         body: Container(
@@ -124,6 +134,16 @@ class _PageLayoutState extends State<PageLayout> {
                   // Update the state of the app
                   _onItemTapped(2);
                   _changeAppBar(2);
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Bus Times'),
+                onTap: () {
+                  // Update the state of the app
+                  _onItemTapped(3);
+                  _changeAppBar(3);
                   // Then close the drawer
                   Navigator.pop(context);
                 },
