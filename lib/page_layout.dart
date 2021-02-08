@@ -95,57 +95,132 @@ class _PageLayoutState extends State<PageLayout> {
           // Add a ListView to the drawer. This ensures the user can scroll
           // through the options in the drawer if there isn't enough vertical
           // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Text('Drawer Header'),
-                decoration: BoxDecoration(
-                  color: Colors.red,
+          child: Container(
+            color: Color.fromRGBO(26, 25, 27, 1),
+            child: ListView(
+              // Important: Remove any padding from the ListView.
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Column(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Image(
+                          height: 80,
+                          width: 80,
+                          image: AssetImage("assets/fjr_white_r.png"),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Father John Redmond",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "By Michael Adragna and Adrian Gri",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w400),
+                        ),
+                      )
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [
+                        0,
+                        0.5,
+                        1
+                      ],
+                          colors: [
+                        Colors.red[700],
+                        Colors.red[400],
+                        Colors.red[700]
+                      ])),
                 ),
-              ),
-              ListTile(
-                title: Text('Announcements'),
-                onTap: () {
-                  // Update the state of the app
-                  _onItemTapped(0);
-                  _changeAppBar(0);
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Map'),
-                onTap: () {
-                  // Update the state of the app
-                  _onItemTapped(1);
-                  _changeAppBar(1);
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Schedule'),
-                onTap: () {
-                  // Update the state of the app
-                  _onItemTapped(2);
-                  _changeAppBar(2);
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Bus Times'),
-                onTap: () {
-                  // Update the state of the app
-                  _onItemTapped(3);
-                  _changeAppBar(3);
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-            ],
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image:
+                        AssetImage("assets/drawer_announcements_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Announcements',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    _onItemTapped(0);
+                    _changeAppBar(0);
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage("assets/drawer_map_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Map',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    _onItemTapped(1);
+                    _changeAppBar(1);
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage("assets/drawer_schedule_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Schedule',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    _onItemTapped(2);
+                    _changeAppBar(2);
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage("assets/drawer_bus_times_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Bus Times',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    _onItemTapped(3);
+                    _changeAppBar(3);
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
