@@ -1,12 +1,12 @@
-import 'package:fjr_app_v2/announcements.dart';
+import 'package:FJR/announcements.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:fjr_app_v2/globals.dart' as globals;
+import 'package:FJR/globals.dart' as globals;
 import 'package:intl/intl.dart';
-import 'package:fjr_app_v2/page_layout.dart';
+import 'package:FJR/page_layout.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
-import 'package:fjr_app_v2/serverkeys.dart' as serverkeys;
+import 'package:FJR/serverkeys.dart' as serverkeys;
 
 class Loading extends StatefulWidget {
   @override

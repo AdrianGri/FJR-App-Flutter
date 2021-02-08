@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fjr_app_v2/globals.dart' as globals;
+import 'package:FJR/globals.dart' as globals;
 
 class Announcements extends StatefulWidget {
   @override

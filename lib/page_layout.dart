@@ -1,12 +1,12 @@
-import 'package:fjr_app_v2/announcements.dart';
+import 'package:FJR/announcements.dart';
 import 'package:flutter/material.dart';
-import 'package:fjr_app_v2/map.dart';
-import 'package:fjr_app_v2/schedule.dart';
-import 'package:fjr_app_v2/Bus.dart';
-import 'package:fjr_app_v2/contacts.dart';
+import 'package:FJR/map.dart';
+import 'package:FJR/schedule.dart';
+import 'package:FJR/Bus.dart';
+import 'package:FJR/contacts.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:fjr_app_v2/settings.dart';
+import 'package:FJR/settings.dart';
 
 class PageLayout extends StatefulWidget {
   @override
