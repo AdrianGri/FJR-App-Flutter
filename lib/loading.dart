@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:fjr_app_v2/page_layout.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:fjr_app_v2/serverkeys.dart' as serverkeys;
 
 class Loading extends StatefulWidget {
   @override
@@ -14,8 +15,8 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   void changePage() async {
-    final keyApplicationId = 'oedHV8CxuXPB00COyTmY6JvY2rQcBgwKDRVNj5QP';
-    final keyClientKey = 'cWw8FeAaBHmpLIEufzcWi5r1fuKUNUHaBDfpTfaE';
+    final keyApplicationId = serverkeys.applicationId;
+    final keyClientKey = serverkeys.clientKey;
     final keyParseServerUrl = 'https://parseapi.back4app.com';
 
     await Parse().initialize(keyApplicationId, keyParseServerUrl,
