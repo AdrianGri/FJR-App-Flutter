@@ -5,6 +5,7 @@ import 'package:fjr_app_v2/schedule.dart';
 import 'package:fjr_app_v2/Bus.dart';
 import 'package:fjr_app_v2/contacts.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PageLayout extends StatefulWidget {
   @override
@@ -88,6 +89,14 @@ class _PageLayoutState extends State<PageLayout> {
     backgroundColor: Colors.red,
   );
   int _selectedIndex = 0;
+
+  _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -249,6 +258,62 @@ class _PageLayoutState extends State<PageLayout> {
                     _changeAppBar(4);
                     // Then close the drawer
                     Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage(
+                        "assets/drawer_anonymous_alerts_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Anonymous Alerts',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    _launchURL(
+                        "https://www.anonymousalerts.com/tcdsb/Mobile/default.aspx");
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage("assets/drawer_website_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Website',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    _launchURL(
+                        "https://www.tcdsb.org/schools/FATHERJOHNREDMOND/Pages/default.aspx");
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage("assets/drawer_twitter_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Twitter',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    _launchURL("https://mobile.twitter.com/FJRCSS");
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage("assets/drawer_instagram_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Instagram',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    _launchURL(
+                        "https://instagram.com/fjrstudentcouncil?igshid=gwmgsv7xurwd");
                   },
                 ),
               ],
