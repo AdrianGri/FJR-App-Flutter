@@ -56,8 +56,8 @@ class _LoadingState extends State<Loading> {
       globals.messagesList = reversedMessagesList;
       globals.datePostedList = reversedDateStringList;
       globals.channelList = reversedChannelList;
-      print(reversedMessagesList);
-      print(reversedDateStringList);
+      //print(reversedMessagesList);
+      //print(reversedDateStringList);
     }
 
     Navigator.of(context).pushReplacement(PageRouteBuilder(

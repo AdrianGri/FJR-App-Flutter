@@ -4,7 +4,6 @@ import 'package:fjr_app_v2/map.dart';
 import 'package:fjr_app_v2/schedule.dart';
 import 'package:fjr_app_v2/Bus.dart';
 
-
 class PageLayout extends StatefulWidget {
   @override
   _PageLayoutState createState() => _PageLayoutState();
@@ -68,10 +67,8 @@ class _PageLayoutState extends State<PageLayout> {
         break;
       case 3:
         setState(() {
-          newAppBar = AppBar(
-            title: Text("Bus Times"),
-            backgroundColor: Colors.red
-          );
+          newAppBar =
+              AppBar(title: Text("Bus Times"), backgroundColor: Colors.red);
         });
     }
   }
@@ -85,7 +82,7 @@ class _PageLayoutState extends State<PageLayout> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: newAppBar,
         body: Container(
