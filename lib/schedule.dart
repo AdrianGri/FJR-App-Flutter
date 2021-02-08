@@ -52,47 +52,50 @@ class Schedule extends StatelessWidget {
         shrinkWrap: true,
         itemCount: 6,
         itemBuilder: (context, index) {
-          return Card(
-            elevation: 0,
-            shadowColor: Colors.grey,
-            color: scheduleColors[index],
-            child: Row(
-              children: <Widget>[
-                Container(
-                  decoration: new BoxDecoration(
-                    color: scheduleAccentColors[index],
-                    borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(5),
-                      bottomLeft: const Radius.circular(5),
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+            child: Card(
+              elevation: 0,
+              shadowColor: Colors.grey,
+              color: scheduleColors[index],
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    decoration: new BoxDecoration(
+                      color: scheduleAccentColors[index],
+                      borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(5),
+                        bottomLeft: const Radius.circular(5),
+                      ),
                     ),
-                  ),
-                  //color: Colors.red[300],
-                  child: SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: Center(
-                      child: Text(
-                        periodName[index],
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold),
+                    //color: Colors.red[300],
+                    child: SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: Center(
+                        child: Text(
+                          periodName[index],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                  child: Text(
-                    periodTime[schedule_index][index],
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                    child: Text(
+                      periodTime[schedule_index][index],
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

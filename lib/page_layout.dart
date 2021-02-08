@@ -6,6 +6,7 @@ import 'package:fjr_app_v2/Bus.dart';
 import 'package:fjr_app_v2/contacts.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fjr_app_v2/settings.dart';
 
 class PageLayout extends StatefulWidget {
   @override
@@ -19,6 +20,11 @@ class _PageLayoutState extends State<PageLayout> {
     Schedule(),
     Bus(),
     Contacts(),
+    Announcements(), // these 4 are just filler. since those are links these
+    Announcements(), // should never be called its just in case something
+    Announcements(), // happens at least it goes to something instead of
+    Announcements(), // crashing
+    Settings(),
   ];
 
   void _onItemTapped(int index) {
@@ -79,6 +85,12 @@ class _PageLayoutState extends State<PageLayout> {
         setState(() {
           newAppBar =
               AppBar(title: Text("Contact"), backgroundColor: Colors.red);
+        });
+        break;
+      case 9:
+        setState(() {
+          newAppBar =
+              AppBar(title: Text("Settings"), backgroundColor: Colors.red);
         });
         break;
     }
@@ -314,6 +326,24 @@ class _PageLayoutState extends State<PageLayout> {
                   onTap: () {
                     _launchURL(
                         "https://instagram.com/fjrstudentcouncil?igshid=gwmgsv7xurwd");
+                  },
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.settings,
+                    size: 50,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Settings',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    _onItemTapped(9);
+                    _changeAppBar(9);
+                    // Then close the drawer
+                    Navigator.pop(context);
                   },
                 ),
               ],

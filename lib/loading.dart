@@ -129,7 +129,7 @@ class _LoadingState extends State<Loading> {
         pageBuilder: (context, animation, anotherAnimation) {
           return PageLayout();
         },
-        transitionDuration: Duration(milliseconds: 700),
+        transitionDuration: Duration(milliseconds: 500),
         transitionsBuilder: (context, animation, anotherAnimation, child) {
           animation = CurvedAnimation(curve: Curves.linear, parent: animation);
           return FadeTransition(
@@ -155,9 +155,36 @@ class _LoadingState extends State<Loading> {
     ]);
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(26, 25, 27, 1),
       body: SafeArea(
         child: Container(
-          child: Text("Loading"),
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image(
+                  height: 250,
+                  width: 250,
+                  image: AssetImage("assets/fjr_icon_mask.png")),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 5),
+                child: Text(
+                  "Father John Redmond",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
+                ),
+              ),
+              Text(
+                "Created by Michael Adragna and Adrian Gri",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18),
+              )
+            ],
+          )),
         ),
       ),
     );
