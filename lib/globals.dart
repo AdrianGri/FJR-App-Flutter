@@ -1,5 +1,13 @@
-import 'package:fjr_app_v2/announcements.dart';
+import 'package:flutter/material.dart';
 
 List<String> messagesList = [];
 List<String> datePostedList = [];
 List<String> channelList = [];
+
+List<Color> announcementColors = [];
+List<Color> accentColors = [];
+
+List<String> firstInitials = [];
+List<String> lastNames = [];
+List<String> roles = [];
+List<String> emails = [];

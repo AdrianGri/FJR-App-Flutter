@@ -10,11 +10,15 @@ class _AnnouncementsState extends State<Announcements> {
   List<String> messageList = [];
   List<String> datePostedList = [];
   List<String> channelList = [];
+  List<Color> colorList = [];
+  List<Color> accentColorList = [];
 
   void getGlobals() {
     messageList = globals.messagesList;
     datePostedList = globals.datePostedList;
     channelList = globals.channelList;
+    colorList = globals.announcementColors;
+    accentColorList = globals.accentColors;
   }
 
   @override
@@ -41,7 +45,7 @@ class _AnnouncementsState extends State<Announcements> {
                         child: Card(
                           elevation: 0,
                           shadowColor: Colors.grey,
-                          color: Colors.blue,
+                          color: colorList[index],
                           child: ListTile(
                             title: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -52,9 +56,9 @@ class _AnnouncementsState extends State<Announcements> {
                                     child: Text(
                                       channelList[index],
                                       style: TextStyle(
-                                        color: Colors.grey[300],
-                                        fontSize: 19,
-                                      ),
+                                          color: accentColorList[index],
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Align(
@@ -62,10 +66,13 @@ class _AnnouncementsState extends State<Announcements> {
                                     child: Text(
                                       datePostedList[index],
                                       style: TextStyle(
-                                        color: Colors.grey[300],
+                                        color: accentColorList[index],
                                         fontSize: 17,
                                       ),
                                     ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,

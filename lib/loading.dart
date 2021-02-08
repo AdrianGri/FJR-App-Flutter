@@ -4,6 +4,8 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:fjr_app_v2/globals.dart' as globals;
 import 'package:intl/intl.dart';
 import 'package:fjr_app_v2/page_layout.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
 class Loading extends StatefulWidget {
   @override
@@ -26,6 +28,8 @@ class _LoadingState extends State<Loading> {
       List<DateTime> tempDateList = [];
       List<String> tempDateStringList = [];
       List<String> tempChannelList = [];
+      List<Color> tempColorList = [];
+      List<Color> tempAccentColorList = [];
 
       for (var map in apiResponse.results) {
         tempMessagesList.add(map["message"]);
@@ -45,6 +49,40 @@ class _LoadingState extends State<Loading> {
         if (tempChannelList[i] == "Send to Everyone") {
           tempChannelList[i] = "General Announcements";
         }
+        switch (tempChannelList[i]) {
+          case "General Announcements":
+            tempColorList.add(Color.fromRGBO(84, 84, 84, 1));
+            tempAccentColorList.add(Color.fromRGBO(191, 191, 191, 1));
+            break;
+          case "Events":
+            tempColorList.add(Color.fromRGBO(123, 108, 48, 1));
+            tempAccentColorList.add(Color.fromRGBO(246, 209, 81, 1));
+            break;
+          case "Civvies days":
+            tempColorList.add(Colors.green[800]);
+            tempAccentColorList.add(Colors.green[300]);
+            break;
+          case "PLC days":
+            tempColorList.add(Color.fromRGBO(76, 52, 109, 1));
+            tempAccentColorList.add(Color.fromRGBO(202, 167, 247, 1));
+            break;
+          case "Library":
+            tempColorList.add(Color.fromRGBO(120, 77, 46, 1));
+            tempAccentColorList.add(Color.fromRGBO(239, 151, 82, 1));
+            break;
+          case "PA days":
+            tempColorList.add(Color.fromRGBO(116, 51, 47, 1));
+            tempAccentColorList.add(Color.fromRGBO(237, 127, 124, 1));
+            break;
+          case "Sports and Clubs":
+            tempColorList.add(Colors.blue[800]);
+            tempAccentColorList.add(Colors.lightBlue[300]);
+            break;
+          default:
+            tempColorList.add(Color.fromRGBO(84, 84, 84, 1));
+            tempAccentColorList.add(Color.fromRGBO(191, 191, 191, 1));
+            break;
+        }
       }
 
       var reversedMessagesList =
@@ -52,10 +90,37 @@ class _LoadingState extends State<Loading> {
       var reversedDateStringList =
           new List<String>.from(tempDateStringList.reversed);
       var reversedChannelList = new List<String>.from(tempChannelList.reversed);
+      var reversedColorList = new List<Color>.from(tempColorList.reversed);
+      var reversedAccentColorList =
+          new List<Color>.from(tempAccentColorList.reversed);
 
       globals.messagesList = reversedMessagesList;
       globals.datePostedList = reversedDateStringList;
       globals.channelList = reversedChannelList;
+      globals.announcementColors = reversedColorList;
+      globals.accentColors = reversedAccentColorList;
+
+      List<String> tempFirstInitials = [];
+      List<String> tempLastNames = [];
+      List<String> tempRoles = [];
+      List<String> tempEmails = [];
+
+      final String jsonData =
+          await rootBundle.loadString("assets/teachers.json");
+      final jsonDecoded = jsonDecode(jsonData);
+
+      for (var teacher in jsonDecoded["teachers"]) {
+        tempFirstInitials.add(teacher["f"][0]);
+        tempLastNames.add(teacher["l"]);
+        tempRoles.add(teacher["r"]);
+        tempEmails.add("${teacher["e"]}@tcdsb.org");
+      }
+
+      globals.firstInitials = tempFirstInitials;
+      globals.lastNames = tempLastNames;
+      globals.roles = tempRoles;
+      globals.emails = tempEmails;
+
       //print(reversedMessagesList);
       //print(reversedDateStringList);
     }
@@ -84,6 +149,11 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return Scaffold(
       body: SafeArea(
         child: Container(

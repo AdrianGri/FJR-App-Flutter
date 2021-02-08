@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fjr_app_v2/map.dart';
 import 'package:fjr_app_v2/schedule.dart';
 import 'package:fjr_app_v2/Bus.dart';
+import 'package:fjr_app_v2/contacts.dart';
+import 'package:flutter/services.dart';
 
 class PageLayout extends StatefulWidget {
   @override
@@ -14,7 +16,8 @@ class _PageLayoutState extends State<PageLayout> {
     Announcements(),
     Map(),
     Schedule(),
-    Bus()
+    Bus(),
+    Contacts(),
   ];
 
   void _onItemTapped(int index) {
@@ -70,6 +73,13 @@ class _PageLayoutState extends State<PageLayout> {
           newAppBar =
               AppBar(title: Text("Bus Times"), backgroundColor: Colors.red);
         });
+        break;
+      case 4:
+        setState(() {
+          newAppBar =
+              AppBar(title: Text("Contact"), backgroundColor: Colors.red);
+        });
+        break;
     }
   }
 
@@ -81,6 +91,11 @@ class _PageLayoutState extends State<PageLayout> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -215,6 +230,23 @@ class _PageLayoutState extends State<PageLayout> {
                     // Update the state of the app
                     _onItemTapped(3);
                     _changeAppBar(3);
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Image(
+                    height: 50,
+                    image: AssetImage("assets/drawer_contact_tab_icon.png"),
+                  ),
+                  title: Text(
+                    'Contact',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    _onItemTapped(4);
+                    _changeAppBar(4);
                     // Then close the drawer
                     Navigator.pop(context);
                   },
