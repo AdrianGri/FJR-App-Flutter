@@ -122,6 +122,76 @@ class _LoadingState extends State<Loading> {
       globals.roles = tempRoles;
       globals.emails = tempEmails;
 
+      List<List<String>> cohortWeeks = [
+        ["a", "b", "a", "b", "a"],
+        ["c", "d", "c", "d", "c"],
+        ["a", "b", "a", "b", "b"],
+        ["c", "d", "c", "d", "d"]
+      ];
+
+      List<List<String>> cohortSundays = [
+        [
+          "10-11",
+          "11-8",
+          "12-13",
+          "1-24",
+          "2-7",
+          "3-7",
+          "4-11",
+          "4-25",
+          "5-23",
+          "6-20"
+        ],
+        [
+          "10-18",
+          "11-22",
+          "1-3",
+          "1-31",
+          "2-14",
+          "3-21",
+          "4-18",
+          "5-2",
+          "5-30"
+        ],
+        ["9-27", "10-25", "11-29", "1-10", "2-21", "3-28", "5-9", "6-6"],
+        ["10-4", "11-1", "12-6", "1-17", "2-28", "4-4", "5-16", "6-13"]
+      ];
+
+      int sunday = 7;
+      DateTime now = new DateTime.now();
+      int tempCurrentWeekday = now.weekday;
+
+      while (now.weekday != sunday) {
+        now = now.add(new Duration(days: 1));
+        print(now.weekday);
+      }
+
+      now = now.subtract(new Duration(days: 7));
+
+      DateFormat lastSundayDateFormatter = DateFormat("EEEE, LLLL d");
+      String tempLastSundayDate = lastSundayDateFormatter.format(now);
+
+      String lastSunday = "${now.month}-${now.day}";
+      print(lastSunday);
+
+      List<String> tempCohortSchedule = [];
+
+      if (cohortSundays[0].contains(lastSunday)) {
+        tempCohortSchedule = cohortWeeks[0];
+      } else if (cohortSundays[1].contains(lastSunday)) {
+        tempCohortSchedule = cohortWeeks[1];
+      } else if (cohortSundays[2].contains(lastSunday)) {
+        tempCohortSchedule = cohortWeeks[2];
+      } else if (cohortSundays[3].contains(lastSunday)) {
+        tempCohortSchedule = cohortWeeks[3];
+      } else {
+        tempCohortSchedule = ["n", "u", "l", "l", "0"];
+      }
+
+      globals.cohortSchedule = tempCohortSchedule;
+      globals.currentWeekday = tempCurrentWeekday;
+      globals.lastSundayDate = tempLastSundayDate;
+
       //print(reversedMessagesList);
       //print(reversedDateStringList);
     }

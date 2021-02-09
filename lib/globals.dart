@@ -11,3 +11,7 @@ List<String> firstInitials = [];
 List<String> lastNames = [];
 List<String> roles = [];
 List<String> emails = [];
+
+List<String> cohortSchedule = [];
+int currentWeekday;
+String lastSundayDate;

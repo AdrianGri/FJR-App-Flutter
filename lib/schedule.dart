@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:FJR/globals.dart' as globals;
 
-class Schedule extends StatelessWidget {
+class Schedule extends StatefulWidget {
+  @override
+  _ScheduleState createState() => _ScheduleState();
+}
+
+class _ScheduleState extends State<Schedule> {
   List<Color> scheduleColors = [
     Colors.red,
     Colors.orange,
@@ -45,10 +51,82 @@ class Schedule extends StatelessWidget {
     ]
   ];
 
+  int currentWeekday = 7;
+  String lastSundayDate = "error";
+  List<String> cohortSchedule = [];
+  List<String> weekDays = ["MON", "TUE", "WED", "THU", "FRI"];
+
+  List<Widget> cohortWidgets = [
+    Text("error"),
+    Text("error"),
+    Text("error"),
+    Text("error"),
+    Text("error"),
+  ];
+
+  void createCohortSchedule() {
+    List<Widget> tempCohortWidgets = [];
+    for (var i = 0; i < 5; i++) {
+      if (i == currentWeekday - 1) {
+        tempCohortWidgets.add(Container(
+          child: Column(
+            children: <Widget>[
+              Text(
+                weekDays[i].toUpperCase(),
+                style: TextStyle(
+                    color: Colors.red[400], fontWeight: FontWeight.w500),
+              ),
+              Text(
+                cohortSchedule[i].toUpperCase(),
+                style: TextStyle(
+                    color: Colors.red[400],
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ));
+      } else {
+        tempCohortWidgets.add(Container(
+          child: Column(
+            children: <Widget>[
+              Text(
+                weekDays[i].toUpperCase(),
+                style:
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              ),
+              Text(
+                cohortSchedule[i].toUpperCase(),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ));
+      }
+    }
+
+    setState(() {
+      cohortWidgets = tempCohortWidgets;
+    });
+  }
+
+  @override
+  void initState() {
+    cohortSchedule = globals.cohortSchedule;
+    currentWeekday = globals.currentWeekday;
+    lastSundayDate = globals.lastSundayDate;
+    createCohortSchedule();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    ListView scheduleListView(schedule_index) {
+    ListView scheduleListView(scheduleIndex) {
       return ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: 6,
         itemBuilder: (context, index) {
@@ -87,7 +165,7 @@ class Schedule extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                     child: Text(
-                      periodTime[schedule_index][index],
+                      periodTime[scheduleIndex][index],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -102,8 +180,41 @@ class Schedule extends StatelessWidget {
       );
     }
 
-    return TabBarView(
-      children: [scheduleListView(0), scheduleListView(1), scheduleListView(2)],
+    return SafeArea(
+      child: Container(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                "Week beginning on $lastSundayDate:",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: cohortWidgets,
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  scheduleListView(0),
+                  scheduleListView(1),
+                  scheduleListView(2)
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
